@@ -1,0 +1,104 @@
+<div
+  class="container py-4 d-flex justify-content-between align-content-center px-5"
+>
+  <div class="d-flex align-items-center gap-2">
+    <div data-cy="todo-back-button">
+      <a routerLink="/" class="text-black">
+        <h4>
+          <i class="bi bi-arrow-left-circle-fill pointer"></i>
+        </h4>
+      </a>
+    </div>
+
+    <div *ngIf="!editActive; else edit">
+      <div class="d-flex align-items-center gap-3">
+        <h4 data-cy="todo-title" class="fw-bold fs-4">{{ activity }}</h4>
+        <i
+          data-cy="todo-title-edit-button"
+          (click)="handleEdit()"
+          class="bi bi-pencil-fill text-secondary pointer"
+        ></i>
+      </div>
+    </div>
+
+    <ng-template #edit class="d-flex align-items-center gap-1">
+      <input
+        [(ngModel)]="activity"
+        data-cy="todo-title"
+        class="w-100 border-0 fs-4 ps-1 pe-5 fw-bold border-bottom focus:border-0 custom-input"
+        type="text"
+      />
+      <i
+        data-cy="todo-title-edit-button"
+        (click)="handleActivityChange()"
+        class="bi bi-pencil-fill text-secondary pointer"
+      ></i>
+    </ng-template>
+  </div>
+
+  <div class="d-flex gap-3">
+    <button
+      data-cy="todo-sort-button"
+      class="btn btn-outline-secondary rounded-5 text-center"
+    >
+      <i class="bi bi-arrow-down-up"></i>
+    </button>
+
+    <button
+      data-cy="todo-add-button"
+      class="btn color-costum btn-secondary border-0 fw-semibold rounded-5 px-4 py-2 text-light :hover"
+    >
+      <i class="bi bi-plus text-light"></i>
+      Tambah
+    </button>
+  </div>
+</div>
+<!-- 
+<div
+  data-cy="todo-empty-state"
+  class="container-md justify-content-center mt-5 d-flex align-items-center"
+>
+  <img class="w-25 pointer" src="assets/todo-empty-state.png" alt="hero-pic" />
+</div> -->
+
+<div
+  *ngFor="let item of todoList"
+  class="container d-flex flex-column justify-content-center align-items-center mt-2"
+>
+  <div data-cy="todo-item" class="list-container">
+    <div class="form-check d-flex align-items-center gap-4">
+      <div>
+        <input
+          class="form-check-input custom-checkbox"
+          type="checkbox"
+          [checked]="item.isDone"
+          (change)="handleCheck(item)"
+          id="flexCheckDefault"
+        />
+        <i
+          class="bi bi-circle-fill dot-list fs-6 ms-3 
+        {{
+            item.priority === 'Very Low'
+              ? 'text-primary'
+              : item.priority === 'Low'
+              ? 'text-success'
+              : item.priority === 'Medium'
+              ? 'text-warning'
+              : item.priority === 'High'
+              ? 'text-info'
+              : 'text-danger'
+          }}"
+        ></i>
+        <span
+          class="ms-2 me-3 fw-bold {{
+            item.isDone ? ' text-decoration-line-through text-secondary' : ''
+          }}"
+          >{{ item.todoItem }}</span 
+        >
+        <i class="bi bi-pencil-fill text-secondary pointer"></i>
+      </div>
+    </div>
+
+    <i class="bi bi-trash3 text-secondary pointer"></i>
+  </div>
+</div>
