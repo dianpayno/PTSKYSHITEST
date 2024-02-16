@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -10,7 +11,8 @@ import { AlertModalComponent } from './components/alert-modal/alert-modal.compon
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DetailListComponent } from './views/detail-list/detail-list.component';
 import { AppRoutingModule } from './app-routing.module';
-
+import { AddlistModalComponent } from './components/addlist-modal/addlist-modal.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -20,13 +22,17 @@ import { AppRoutingModule } from './app-routing.module';
     CardListComponent,
     AlertModalComponent,
     DetailListComponent,
+    AddlistModalComponent,
    
   ],
   imports: [
     BrowserModule,
     NgbModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    NgSelectModule,
+    ReactiveFormsModule,
+    HttpClientModule
     
   ],
   providers: [],

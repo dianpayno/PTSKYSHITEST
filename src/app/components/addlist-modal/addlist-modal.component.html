@@ -1,0 +1,99 @@
+<div data-cy="modal-add">
+  <div class="modal-header">
+    <i
+      data-cy="modal-add-close-button"
+      (click)="modalService.dismissAll()"
+      class="bi bi-x-lg position-absolute top-2 end-0 p-4 pointer fs-4 fw-bold"
+    ></i>
+    <h5 data-cy="modal-add-title" class="modal-title">{{title}}</h5>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="submitListForm" (ngSubmit)="submit()">
+      <div class="mb-3 px-3">
+        <label
+          data-cy="modal-add-name-title"
+          for="exampleFormControlInput1"
+          class="form-label my-1 text-uppercase fw-bold"
+          >Nama List Item</label
+        >
+        <input
+         
+          formControlName="title"
+          data-cy="modal-add-name-input"
+          type="text"
+          class="form-control"
+          id="exampleFormControlInput1"
+          placeholder="Tambahkan nama list item"
+        />
+      </div>
+
+      <div class="d-flex flex-column mt-3 px-3">
+        <label
+          data-cy="modal-add-priority-title"
+          class="text-uppercase fw-bold my-1"
+          id="priority-label"
+          >Priority</label
+        >
+
+        <div class="w-25">
+          <ng-select
+            formControlName="priority"
+            [items]="options"
+            bindValue="value"
+            bindLabel="name"
+            [clearable]="false"
+          >
+            <ng-template ng-label-tmp let-item="item">
+              <i
+                class="bi bi-circle-fill {{
+                  item.value === 'very_high'
+                    ? 'text-danger'
+                    : item.value === 'high'
+                    ? 'text-warning'
+                    : item.value === 'medium'
+                    ? 'text-success'
+                    : item.value === 'low'
+                    ? 'text-info'
+                    : 'costum-color'
+                }}"
+              ></i>
+              <span class="ms-2">{{ item.label }}</span>
+            </ng-template>
+            <ng-template
+              ng-option-tmp
+              let-item="item"
+              let-index="index"
+              let-search="searchTerm"
+            >
+              <i
+                class="bi bi-circle-fill {{
+                  item.value === 'very_high'
+                    ? 'text-danger'
+                    : item.value === 'high'
+                    ? 'text-warning'
+                    : item.value === 'medium'
+                    ? 'text-success'
+                    : item.value === 'low'
+                    ? 'text-info'
+                    : 'costum-color'
+                }}"
+              ></i>
+              <span class="ms-2">{{ item.label }}</span>
+            </ng-template>
+            <
+          </ng-select>
+        </div>
+      </div>
+      <div class="modal-footer mt-4">
+        <button
+          data-cy="modal-add-save-button"
+          [disabled]="submitListForm.invalid"
+          type="submit"
+          class="btn color-costum btn-secondary border-0 fw-semibold rounded-5 px-4 py-2 text-light"
+        >
+          Simpan
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

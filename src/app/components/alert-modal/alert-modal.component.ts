@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, Input} from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -9,4 +9,6 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 export class AlertModalComponent {
   modalService = inject(NgbModal);
   activity: string = 'Meeting dengan Client';
+
+  @Input() message: string = '';
 }
