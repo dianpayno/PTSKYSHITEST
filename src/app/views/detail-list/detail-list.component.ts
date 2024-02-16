@@ -1,22 +1,108 @@
-import { Component, inject, Input, TemplateRef } from '@angular/core';
+import { Component, inject, TemplateRef, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ItemList } from 'src/app/model/ItemList';
+import { todoItems, ItemList } from 'src/app/model/ItemList';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-detail-list',
   templateUrl: './detail-list.component.html',
   styleUrls: ['./detail-list.component.css'],
 })
-export class DetailListComponent {
+export class DetailListComponent implements OnInit {
   editActive: boolean = false;
+  isLoading: boolean = true;
   titleAddList: string = 'Tambah List Item';
   titleEditList: string = 'Edit  List Item';
-  activity: string = 'Meeting dengan Client';
   message: string = 'Apakah anda yakin menghapus list item';
+  defaultValue: todoItems = {
+    title: null,
+    priority: 'very-high',
+  };
   newData: ItemList;
- 
+  updateTitle: {
+    title: string;
+  };
+  listItem: todoItems;
 
-  todoList: ItemList[] = [];
+  listId: number;
+  baseUrl = 'https://todo.api.devcode.gethired.id/activity-groups/';
+  activeRoute: ActivatedRoute = inject(ActivatedRoute);
+  http: HttpClient = inject(HttpClient);
+
+  ngOnInit() {
+    this.listId = this.activeRoute.snapshot.params['id'];
+    this.fetchDetailItem();
+  }
+
+  addListItem(data: any) {
+    this.listItem = {
+      ...data,
+      activity_group_id: this.listId,
+    };
+    const headers: HttpHeaders = new HttpHeaders({
+      'Content-Type': 'application/json',
+    });
+    this.http
+      .post('https://todo.api.devcode.gethired.id/todo-items', this.listItem, {
+        headers,
+      })
+      .subscribe(() => {
+        this.fetchDetailItem();
+      });
+  }
+
+  updateListItem(data: any, item: number) {
+    this.listItem = {
+      ...data,
+      activity_group_id: this.listId,
+    };
+    const headers: HttpHeaders = new HttpHeaders({
+      'Content-Type': 'application/json',
+    });
+    this.http
+      .patch(
+        `https://todo.api.devcode.gethired.id/todo-items/${item}`,
+        this.listItem,
+        {
+          headers,
+        }
+      )
+      .subscribe((res) => {
+        console.log(res);
+        this.fetchDetailItem();
+      });
+  }
+
+  deleteListItem(id: number) {
+    this.http
+      .delete(`https://todo.api.devcode.gethired.id/todo-items/${id}`)
+      .subscribe(() => {
+        this.fetchDetailItem();
+      });
+  }
+
+  private fetchDetailItem() {
+    this.http.get(`${this.baseUrl}${this.listId}`).subscribe((res: any) => {
+      this.newData = res;
+      this.isLoading = false;
+    });
+   
+  }
+
+  updateActivityTitle() {
+    this.updateTitle = {
+      title: this.newData.title,
+    };
+    this.http
+      .patch(`${this.baseUrl}${this.listId}`, this.updateTitle)
+      .subscribe((res) => {
+        console.log(res);
+        console.log(this.updateTitle);
+        this.editActive = false;
+        this.fetchDetailItem();
+      });
+  }
 
   sortItem: any[] = [
     {
@@ -55,22 +141,25 @@ export class DetailListComponent {
     this.editActive = true;
   }
 
-  handleActivityChange() {
-    console.log(this.activity);
-    this.editActive = false;
-  }
-
   handleCheck(item: any) {
-    item.is_active= !item.is_active;
-  }
-
-  addNewList(data:ItemList) {
-    this.newData = {
-      ...data,
-      is_active: false,
-    }
-    this.todoList.push(this.newData);
-    console.log(this.newData)
+    this.listItem = {
+      ...item,
+      is_active: !item.is_active,
+    };
+    const headers: HttpHeaders = new HttpHeaders({
+      'Content-Type': 'application/json',
+    });
+    this.http
+      .patch(
+        `https://todo.api.devcode.gethired.id/todo-items/${item.id}`,
+        this.listItem,
+        {
+          headers,
+        }
+      )
+      .subscribe(() => {
+        this.fetchDetailItem();
+      });
   }
 
   private modalService = inject(NgbModal);

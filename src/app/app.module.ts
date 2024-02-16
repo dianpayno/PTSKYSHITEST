@@ -13,6 +13,8 @@ import { DetailListComponent } from './views/detail-list/detail-list.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AddlistModalComponent } from './components/addlist-modal/addlist-modal.component';
 import { HttpClientModule } from '@angular/common/http';
+import { AlertSuccessComponent } from './components/alert-success/alert-success.component';
+import { LoadingComponent } from './components/loading/loading.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +25,8 @@ import { HttpClientModule } from '@angular/common/http';
     AlertModalComponent,
     DetailListComponent,
     AddlistModalComponent,
+    AlertSuccessComponent,
+    LoadingComponent,
    
   ],
   imports: [

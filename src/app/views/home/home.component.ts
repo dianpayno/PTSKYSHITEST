@@ -10,15 +10,17 @@ import { Activity } from 'src/app/model/Activity';
 })
 export class HomeComponent implements OnInit {
   http: HttpClient = inject(HttpClient);
+  private baseUrl = 'https://todo.api.devcode.gethired.id/activity-groups';
   message: string = 'Apakah anda yakin menghapus activity';
   activityList: any[];
   activity: Activity = {
     title: 'New Activity',
     email: 'dianpayno@gmail.com',
   };
+  loading: boolean = true;
 
   ngOnInit(): void {
-    this.fetchActivity()
+    this.fetchActivity();
   }
 
   addNewActivity() {
@@ -26,25 +28,31 @@ export class HomeComponent implements OnInit {
       'Content-Type': 'application/json',
     });
     this.http
-      .post(
-        'https://todo.api.devcode.gethired.id/activity-groups?email=dianpayno@gmail.com',
-        this.activity,
-        {
-          headers,
-        }
-      )
+      .post(`${this.baseUrl}?email=dianpayno@gmail.com`, this.activity, {
+        headers,
+      })
       .subscribe((res) => {
         console.log(res);
+        this.fetchActivity();
       });
   }
 
   private fetchActivity() {
-    this.http.get('https://todo.api.devcode.gethired.id/activity-groups?email=dianpayno@gmail.com')
-    .subscribe((res:any) => {
-      console.log(res)
-      this.activityList = res.data
-    
-    })
+    this.http.get(`${this.baseUrl}?email=dianpayno@gmail.com`).subscribe(
+      (res: any) => {
+        this.activityList = res.data;
+      }
+    );
+    setTimeout(() => {
+      this.loading = false;
+    },1000)
+  }
+
+  deleteActivity(id: number) {
+    this.http.delete(`${this.baseUrl}/${id}`).subscribe((res) => {
+      console.log(res);
+      this.fetchActivity();
+    });
   }
 
   private modalService = inject(NgbModal);
