@@ -18,7 +18,7 @@ export class AlertModalComponent {
   delete() {
     this.deleteActivity.emit();
     this.modalService.dismissAll();
-    // this.showAlertSuccess = true;
+    this.showAlertSuccess = true;
   }
   openVerticallyCentered(content: TemplateRef<any>) {
     this.modalService.open(content, { centered: true, size: 'sm' });

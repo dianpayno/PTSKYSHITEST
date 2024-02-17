@@ -13,6 +13,7 @@ export class HomeComponent implements OnInit {
   private modalService: NgbModal = inject(NgbModal);
   message: string = 'Apakah anda yakin menghapus activity';
   activityList: any[];
+  deleteSuccess: boolean = false;
 
 
   ngOnInit(): void {
@@ -28,7 +29,9 @@ export class HomeComponent implements OnInit {
   deleteActivity(id: number) {
     this.todoService.deleteActivity(id).subscribe(() => {
       this.fetchActivity();
+      this.deleteSuccess = true;
     });
+   
   }
 
   private fetchActivity() {

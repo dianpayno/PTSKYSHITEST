@@ -1,81 +1,75 @@
+<div
+  class="container py-4 d-flex justify-content-between align-content-center px-5"
+>
+  <h3 data-cy="activity-title" class="fw-bold">Activity</h3>
 
-  <div
-    class="container py-4 d-flex justify-content-between align-content-center px-5"
+  <button
+    data-cy="activity-add-button"
+    (click)="addNewActivity()"
+    class="btn color-costum btn-secondary border-0 fw-semibold rounded-5 px-4 py-2 text-light"
   >
-    <h3 data-cy="activity-title" class="fw-bold">Activity</h3>
+    <i class="bi bi-plus text-light"></i>
+    Tambah
+  </button>
+</div>
 
-    <button
-      data-cy="activity-add-button"
-      (click)="addNewActivity()"
-      class="btn color-costum btn-secondary border-0 fw-semibold rounded-5 px-4 py-2 text-light"
-    >
-      <i class="bi bi-plus text-light"></i>
-      Tambah
-    </button>
-  </div>
+<div
+  class="container justify-content-center"
+  *ngIf="activityList?.length > 0; else activityEmpty"
+>
+  <div class="container px-5 justify-content-center">
+    <div class="d-flex flex-wrap gap-4 justify-content-start">
+      <div *ngFor="let item of activityList">
+        <div data-cy="activity-item" class="col-3 activity-card pointer">
+          <a
+            class="text-decoration-none text-black"
+            [routerLink]="'detail/' + item.id"
+          >
+            <div class="h-100">
+              <h5 data-cy="activity-item-title" class="text-capitalize fw-bold">
+                {{ item.title }}
+              </h5>
+            </div>
+          </a>
+          <div class="position-absolute bottom-0">
+            <div class="d-flex gap-3 align-items-center align-content-center">
+              <p
+                data-cy="activity-item-date"
+                class="text-secondary fw-semibold"
+              >
+                {{ item.created_at | date : "dd MMMM yyyy" }}
+              </p>
 
-  <div
-    class="container justify-content-center"
-    *ngIf="activityList?.length > 0; else activityEmpty"
-  >
-    <div class="container px-5 justify-content-center">
-      <div class="d-flex flex-wrap gap-4 justify-content-start">
-        <div *ngFor="let item of activityList">
-          <div data-cy="activity-item" class="col-3 activity-card pointer">
-            <a
-              class="text-decoration-none text-black"
-              [routerLink]="'detail/' + item.id"
-            >
-              <div class="h-100">
-                <h5
-                  data-cy="activity-item-title"
-                  class="text-capitalize fw-bold"
-                >
-                  {{ item.title }}
-                </h5>
-              </div>
-            </a>
-            <div class="position-absolute bottom-0">
-              <div class="d-flex gap-3 align-items-center align-content-center">
-                <p
-                  data-cy="activity-item-date"
-                  class="text-secondary fw-semibold "
-                >
-                  {{ item.created_at | date : "dd MMMM yyyy" }}
-                </p>
-
-                <button
-                  data-cy="activity-item-delete-button"
-                  class="btn border-0"
-                  (click)="openVerticallyCentered(content)"
-                >
-                  <i class="bi bi-trash3 text-secondary pointer"></i>
-                  <ng-template #content>
-                    <app-alert-modal
-                      [message]="message"
-                      [activityList]="item"
-                      (deleteActivity)="deleteActivity(item.id)"
-                    />
-                  </ng-template>
-                </button>
-
-              </div>
+              <button
+                data-cy="activity-item-delete-button"
+                class="btn border-0"
+                (click)="openVerticallyCentered(content)"
+              >
+                <i class="bi bi-trash3 text-secondary pointer"></i>
+                <ng-template #content>
+                  <app-alert-modal
+                    [message]="message"
+                    [activityList]="item"
+                    (deleteActivity)="deleteActivity(item.id)"
+                  />
+                </ng-template>
+              </button>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
+</div>
 
-  <ng-template #activityEmpty data-cy="activity-empty-state">
-    <div
-      class="container-md justify-content-center mt-5 d-flex align-items-center"
-    >
-      <img
-        class="w-50 pointer"
-        src="assets/activity-empty-state.png"
-        alt="hero-pic"
-      />
-    </div>
-  </ng-template>
-
+<ng-template #activityEmpty data-cy="activity-empty-state">
+  <div
+    class="container-md justify-content-center mt-5 d-flex align-items-center"
+  >
+    <img
+      class="w-50 pointer"
+      src="assets/activity-empty-state.png"
+      alt="hero-pic"
+    />
+  </div>
+</ng-template>
