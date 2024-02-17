@@ -65,7 +65,6 @@ export class DetailListComponent implements OnInit {
     this.TodoServices.fetchDetailActivity(this.listId).subscribe((res: any) => {
       this.newData = res;
       this.sortedData = [...this.newData.todo_items];
-      console.log(this.sortedData);
       this.isLoading = false;
     });
   }
