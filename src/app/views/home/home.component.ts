@@ -1,6 +1,6 @@
 import { Component, inject, TemplateRef, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Activity } from 'src/app/model/Activity';
+
 import { TodoServices } from 'src/app/Services/Todo.services';
 
 @Component({
@@ -13,7 +13,7 @@ export class HomeComponent implements OnInit {
   private modalService: NgbModal = inject(NgbModal);
   message: string = 'Apakah anda yakin menghapus activity';
   activityList: any[];
-  loading: boolean = true;
+
 
   ngOnInit(): void {
     this.fetchActivity();
@@ -35,9 +35,7 @@ export class HomeComponent implements OnInit {
     this.todoService.fetchActivity().subscribe((res: any) => {
       this.activityList = res.data;
     });
-    setTimeout(() => {
-      this.loading = false;
-    }, 1000);
+  
   }
 
   openVerticallyCentered(content: TemplateRef<any>) {
