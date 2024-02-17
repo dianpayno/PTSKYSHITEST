@@ -12,23 +12,22 @@
       </a>
     </div>
 
-    <div *ngIf="!editActive; else edit">
-      <div class="d-flex align-items-center gap-3">
-        <h5
-          data-cy="todo-title"
-          (click)="handleEdit()"
-          class="fw-bold fs-4 text-capitalize"
-        >
-          {{ newData?.title }}
-        </h5>
-        <i
-          (click)="handleEdit()"
-          class="bi bi-pencil-fill text-secondary pointer"
-        ></i>
-      </div>
+    <div class="d-flex align-items-center">
+      <input
+      [(ngModel)]="newData.title"
+      data-cy="todo-title"
+      class="w-100 border-0 fs-4 ps-1 pe-5 fw-bold border-bottom focus:border-0 custom-input"
+      type="text"
+      (blur)="updateActivityTitle()"
+    />
+    <i
+      data-cy="todo-title-edit-button"
+      (click)="updateActivityTitle()"
+      class="bi bi-pencil-fill text-secondary pointer"
+    ></i>
     </div>
 
-    <ng-template #edit class="d-flex align-items-center gap-1">
+    <!-- <ng-template #edit class="d-flex align-items-center gap-1">
       <input
         [(ngModel)]="newData.title"
         data-cy="todo-title-edit-button"
@@ -41,7 +40,7 @@
         (click)="updateActivityTitle()"
         class="bi bi-pencil-fill text-secondary pointer"
       ></i>
-    </ng-template>
+    </ng-template> -->
   </div>
 
   <div class="d-flex gap-3">
