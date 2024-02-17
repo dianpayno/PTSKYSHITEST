@@ -42,27 +42,26 @@
           id="priority-label"
           formControlName="priority"
         >
-          <ng-option
-            *ngFor="let item of options"
-            value="{{ item.value }}"
-          >
-            <span [attr.data-cy]="item.data">
-              <i
-                class="bi bi-circle-fill {{
-                  item.value === 'very-high'
-                    ? 'text-danger'
-                    : item.value === 'high'
-                    ? 'text-warning'
-                    : item.value === 'normal'
-                    ? 'text-success'
-                    : item.value === 'low'
-                    ? 'text-info'
-                    : 'costum-color'
-                }}"
-              ></i>
-              {{ item.label }}
-            </span>
-          </ng-option>
+          <div data-cy="modal-add-priority-item">
+            <ng-option *ngFor="let item of options" value="{{ item.value }}">
+              <span [attr.data-cy]="item.data">
+                <i
+                  class="bi bi-circle-fill {{
+                    item.value === 'very-high'
+                      ? 'text-danger'
+                      : item.value === 'high'
+                      ? 'text-warning'
+                      : item.value === 'normal'
+                      ? 'text-success'
+                      : item.value === 'low'
+                      ? 'text-info'
+                      : 'costum-color'
+                  }}"
+                ></i>
+                {{ item.label }}
+              </span>
+            </ng-option>
+          </div>
         </ng-select>
       </div>
       <div class="modal-footer mt-4">
