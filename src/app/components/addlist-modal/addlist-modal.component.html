@@ -33,19 +33,37 @@
           id="priority-label"
           >Priority</label
         >
-        <select
+        <ng-select
           data-cy="modal-add-priority-dropdown"
+          class="w-25"
+          appearance="outline"
+          [searchable]="false"
+          [clearable]="false"
+          id="priority-label"
           formControlName="priority"
-          class="form-select w-25"
         >
-          <option
+          <ng-option
             *ngFor="let item of options"
-            [attr.data-cy]="item.data"
             value="{{ item.value }}"
           >
-            {{ item.label }}
-          </option>
-        </select>
+            <span [attr.data-cy]="item.data">
+              <i
+                class="bi bi-circle-fill {{
+                  item.value === 'very-high'
+                    ? 'text-danger'
+                    : item.value === 'high'
+                    ? 'text-warning'
+                    : item.value === 'normal'
+                    ? 'text-success'
+                    : item.value === 'low'
+                    ? 'text-info'
+                    : 'costum-color'
+                }}"
+              ></i>
+              {{ item.label }}
+            </span>
+          </ng-option>
+        </ng-select>
       </div>
       <div class="modal-footer mt-4">
         <button
