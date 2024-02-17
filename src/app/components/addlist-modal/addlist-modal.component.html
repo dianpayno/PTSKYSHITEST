@@ -34,18 +34,16 @@
           >Priority</label
         >
         <ng-select
-          data-cy="modal-add-priority-item"
+          data-cy="modal-add-priority-dropdown"
+          class="w-25"
           appearance="outline"
           [searchable]="false"
           [clearable]="false"
           id="priority-label"
           formControlName="priority"
         >
-          <ng-option
-            *ngFor="let item of options"
-            value="{{ item.value }}"
-          >
-            <span data-cy="modal-add-priority-item">
+          <ng-option *ngFor="let item of options" value="{{ item.value }}" data-cy="modal-add-priority-item" >
+            <span [attr.data-cy]="item.data">
               <i
                 class="bi bi-circle-fill {{
                   item.value === 'very-high'
