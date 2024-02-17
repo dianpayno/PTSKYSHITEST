@@ -138,11 +138,18 @@
         </div>
       </div>
 
-      <i
+      <button
       data-cy="todo-item-delete-button"
-        (click)="openVerticallyCentered(alertDelete)"
-        class="bi bi-trash3 text-secondary pointer"
-      ></i>
+      (click)="openVerticallyCentered(alertDelete)"
+      class="btn "
+      >
+        <i
+      
+          class="bi bi-trash3 text-secondary pointer"
+        ></i>
+
+      </button>
+
       <ng-template #alertDelete>
         <app-alert-modal
           [message]="item.title"
