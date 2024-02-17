@@ -13,7 +13,6 @@
     </div>
 
     <div data-cy="todo-title" class="d-flex align-items-center">
-      <span (click)="focusInput()" class="d-none">{{ newData?.title }}</span>
       <input
         [(ngModel)]="newData.title"
         #inputElement
@@ -23,7 +22,9 @@
         type="text"
         (blur)="updateActivityTitle()"
       />
-      <span (click)="focusInput()" class="d-none">{{ newData?.title }}</span>
+      <span (click)="focusInput()" data-cy="todo-title" class="d-none">{{
+        newData?.title
+      }}</span>
       <i
         data-cy="todo-title-edit-button"
         (click)="updateActivityTitle()"
