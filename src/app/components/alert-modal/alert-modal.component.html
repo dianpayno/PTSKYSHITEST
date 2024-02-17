@@ -1,4 +1,4 @@
-<div data-cy="modal-delete" *ngIf="!showAlertSuccess; else success">
+<div  *ngIf="!showAlertSuccess; else success">
   <div class="modal-body py-3 px-3 d-flex flex-column align-items-center">
     <div data-cy="modal-delete-icon" class="mb-3">
         <i class="bi bi-exclamation-triangle text-danger fs-1"></i>
@@ -18,7 +18,7 @@
       data-cy="modal-delete-cancel-button"
       type="button"
       class="btn btn-secondary rounded-4 px-4 fw-semibold"
-    (click)="modalService.dismissAll()"
+      (click)="modalService.dismissAll()"
     >
       Batal
     </button>
@@ -33,7 +33,7 @@
   </div>
 </div>
 
-<ng-template #success>
+<ng-template data-cy="modal-information" #success>
   <app-alert-success />
 </ng-template>
 

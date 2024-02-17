@@ -31,24 +31,32 @@
               [routerLink]="'detail/' + item.id"
             >
               <div class="h-100">
-                <h5 data-cy="activity-item-title" class="text-capitalize fw-bold">{{ item.title }}</h5>
+                <h5
+                  data-cy="activity-item-title"
+                  class="text-capitalize fw-bold"
+                >
+                  {{ item.title }}
+                </h5>
               </div>
             </a>
             <div class="position-absolute bottom-0">
               <div class="d-flex gap-5">
-                <p 
-                data-cy="activity-item-date"
-                class="text-secondary fw-semibold">
+                <p
+                  data-cy="activity-item-date"
+                  class="text-secondary fw-semibold"
+                >
                   {{ item.created_at | date : "dd MMMM yyyy" }}
                 </p>
 
-                <i
-                data-cy="activity-item-delete-button"
+                <button
+                  class="btn border-0"
+                  data-cy="activity-item-delete-button"
                   (click)="openVerticallyCentered(content)"
-                  class="bi bi-trash3 text-secondary pointer"
-                ></i>
+                >
+                  <i class="bi bi-trash3 text-secondary pointer"></i>
+                </button>
 
-                <ng-template #content>
+                <ng-template data-cy="modal-delete"  #content>
                   <app-alert-modal
                     [message]="message"
                     [activityList]="item"
