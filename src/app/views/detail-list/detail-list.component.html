@@ -14,15 +14,10 @@
 
     <div *ngIf="!editActive; else edit">
       <div class="d-flex align-items-center gap-3">
-        <h5
-          data-cy="todo-title"
-          (click)="handleEdit()"
-          class="fw-bold fs-4 text-capitalize"
-        >
+        <h5 (click)="handleEdit()" class="fw-bold fs-4 text-capitalize">
           {{ newData?.title }}
         </h5>
         <i
-          data-cy="todo-title-edit-button"
           (click)="handleEdit()"
           class="bi bi-pencil-fill text-secondary pointer"
         ></i>
@@ -61,15 +56,15 @@
         <i class="bi bi-arrow-down-up"></i>
       </button>
       <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-        <div *ngFor="let item of sortItem; let i = index">
+        <div data-cy="sort-parent" *ngFor="let item of sortItem; let i = index">
           <button
             [attr.data-cy]="item.data"
             ngbDropdownItem
             (click)="item.click(item, i)"
             class="d-flex gap-3 btn justify-content-between align-items-center"
           >
-              <i class="{{ item.icon }}"></i>
-              <span>{{ item.title }}</span>
+            <i class="{{ item.icon }}"></i>
+            <span>{{ item.title }}</span>
             <i *ngIf="item.active === i" class="bi bi-check text-costum"></i>
           </button>
         </div>
@@ -102,6 +97,7 @@
       <div class="form-check d-flex align-items-center gap-4">
         <div>
           <input
+          data-cy="todo-item-checkbox"
             class="form-check-input custom-checkbox"
             type="checkbox"
             [checked]="!item.is_active"
