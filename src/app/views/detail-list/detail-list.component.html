@@ -12,35 +12,24 @@
       </a>
     </div>
 
-    <div class="d-flex align-items-center">
-      <input
-      [(ngModel)]="newData.title"
-      data-cy="todo-title"
-      class="w-100 border-0 fs-4 ps-1 pe-5 fw-bold border-bottom focus:border-0 custom-input"
-      type="text"
-      (blur)="updateActivityTitle()"
-    />
-    <i
-      data-cy="todo-title-edit-button"
-      (click)="updateActivityTitle()"
-      class="bi bi-pencil-fill text-secondary pointer"
-    ></i>
-    </div>
-
-    <!-- <ng-template #edit class="d-flex align-items-center gap-1">
+    <div data-cy="todo-title" class="d-flex align-items-center">
+      <span (click)="focusInput()" class="d-none">{{ newData?.title }}</span>
       <input
         [(ngModel)]="newData.title"
-        data-cy="todo-title-edit-button"
+        #inputElement
+        placeholder="New Activity"
+        data-cy="todo-title"
         class="w-100 border-0 fs-4 ps-1 pe-5 fw-bold border-bottom focus:border-0 custom-input"
         type="text"
         (blur)="updateActivityTitle()"
       />
+      <span (click)="focusInput()" class="d-none">{{ newData?.title }}</span>
       <i
         data-cy="todo-title-edit-button"
         (click)="updateActivityTitle()"
         class="bi bi-pencil-fill text-secondary pointer"
       ></i>
-    </ng-template> -->
+    </div>
   </div>
 
   <div class="d-flex gap-3">
@@ -62,7 +51,10 @@
         ngbDropdownMenu
         aria-labelledby="dropdownBasic1"
       >
-        <div data-cy="sort-selection" *ngFor="let item of sortItem; let i = index">
+        <div
+          data-cy="sort-selection"
+          *ngFor="let item of sortItem; let i = index"
+        >
           <button
             [attr.data-cy]="item.data"
             ngbDropdownItem

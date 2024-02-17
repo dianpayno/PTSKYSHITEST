@@ -1,4 +1,4 @@
-import { Component, inject, TemplateRef, OnInit } from '@angular/core';
+import { Component, inject, TemplateRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { todoItems, ItemList } from 'src/app/model/ItemList';
@@ -14,6 +14,8 @@ export class DetailListComponent implements OnInit {
   ListItemServices: ListItemServices = inject(ListItemServices);
   TodoServices: TodoServices = inject(TodoServices);
   activeRoute: ActivatedRoute = inject(ActivatedRoute);
+  @ViewChild('inputElement') inputElement: any;
+
 
   editActive: boolean = false;
   isLoading: boolean = true;
@@ -27,6 +29,11 @@ export class DetailListComponent implements OnInit {
   newData: ItemList;
   listId: number;
   sortedData: todoItems[];
+
+  focusInput() {
+    this.inputElement.nativeElement.focus();
+    this.editActive = true;
+  }
 
   ngOnInit() {
     this.listId = this.activeRoute.snapshot.params['id'];
@@ -71,9 +78,7 @@ export class DetailListComponent implements OnInit {
     );
   }
 
-  handleEdit() {
-    this.editActive = true;
-  }
+ 
 
   updateIsCompleted(item: any) {
     this.ListItemServices.updateIsCompleted(item).subscribe(() => {
