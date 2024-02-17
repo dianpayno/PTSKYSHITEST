@@ -3,9 +3,20 @@
     height: 25px;
     width: 25px;
 }
+
+.custom-input{
+  width: 90%;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: none; /* Warna border bottom sesuaikan dengan keinginan Anda */
+  outline: none; /* Hapus outline saat focus untuk tampilan yang lebih bersih */
+  transition: border-bottom 0.3s; 
+}
 .custom-input:focus {
-  border: none;
-  outline: none;
+  width: 100%;
+  border-bottom: 1px solid gray;
+  
 }
 
 .list-container{
