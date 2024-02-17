@@ -106,6 +106,7 @@
             id="flexCheckDefault"
           />
           <i
+          data-cy="todo-item-priority-indicator"
             class="bi bi-circle-fill {{
               item.priority === 'very-high'
                 ? 'text-danger'
@@ -119,6 +120,7 @@
             }}"
           ></i>
           <span
+          data-cy="todo-item-title"
             class="ms-2 me-3 fw-bold text-capitalize {{
               !item.is_active
                 ? ' text-decoration-line-through text-secondary'
@@ -127,6 +129,7 @@
             >{{ item.title }}</span
           >
           <i
+          data-cy="todo-item-delete-button"
             (click)="openModalAddList(editlist)"
             class="bi bi-pencil-fill text-secondary pointer"
           ></i>
