@@ -25,11 +25,11 @@ export class AddlistModalComponent implements OnInit {
   selectedOption: string;
   activity: string;
   options = [
-    { label: 'Very High', value: 'very-high' },
-    { label: 'High', value: 'high' },
-    { label: 'Medium', value: 'normal' },
-    { label: 'Low', value: 'low' },
-    { label: 'Very Low', value: 'very-low' },
+    { label: 'Very High', value: 'very-high', data:'modal-add-priority-very-high' },
+    { label: 'High', value: 'high', data:'modal-add-priority-high' },
+    { label: 'Medium', value: 'normal', data:'modal-add-priority-medium' },
+    { label: 'Low', value: 'low', data:'modal-add-priority-low' },
+    { label: 'Very Low', value: 'very-low', data:'modal-add-priority-very-low' },
   ];
 
   ngOnInit(): void {

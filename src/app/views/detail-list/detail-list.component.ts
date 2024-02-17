@@ -31,9 +31,10 @@ export class DetailListComponent implements OnInit {
   sortedData: todoItems[];
 
   focusInput() {
-    this.inputElement.nativeElement.focus();
-    this.editActive = true;
+  this.editActive = !this.editActive;
   }
+
+
 
   ngOnInit() {
     this.listId = this.activeRoute.snapshot.params['id'];
@@ -74,6 +75,7 @@ export class DetailListComponent implements OnInit {
       () => {
         this.editActive = false;
         this.fetchDetailItem();
+        this.editActive = false;
       }
     );
   }

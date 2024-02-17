@@ -36,55 +36,55 @@
 
         <div data-cy="modal-add-priority-dropdown" class="w-25">
           <ng-select
-          data-cy="modal-add-priority-item"
+            data-cy="modal-add-priority-item"
             formControlName="priority"
             [items]="options"
             bindValue="value"
             bindLabel="name"
             [clearable]="false"
           >
-            <ng-template
-              
-              ng-label-tmp
-              let-item="item"
-            >
-              <i
-                class="bi bi-circle-fill {{
-                  item.value === 'very-high'
-                    ? 'text-danger'
-                    : item.value === 'high'
-                    ? 'text-warning'
-                    : item.value === 'normal'
-                    ? 'text-success'
-                    : item.value === 'low'
-                    ? 'text-info'
-                    : 'costum-color'
-                }}"
-              ></i>
-              <span class="ms-2">{{ item.label }}</span>
-            </ng-template>
-            <ng-template
-              ng-option-tmp
-              let-item="item"
-              let-index="index"
-              let-search="searchTerm"
-            >
-              <i
-                class="bi bi-circle-fill {{
-                  item.value === 'very-high'
-                    ? 'text-danger'
-                    : item.value === 'high'
-                    ? 'text-warning'
-                    : item.value === 'normal'
-                    ? 'text-success'
-                    : item.value === 'low'
-                    ? 'text-info'
-                    : 'costum-color'
-                }}"
-              ></i>
-              <span class="ms-2">{{ item.label }}</span>
-            </ng-template>
-            <
+           
+              <ng-template ng-label-tmp let-item="item">
+                <i
+                  class="bi bi-circle-fill {{
+                    item.value === 'very-high'
+                      ? 'text-danger'
+                      : item.value === 'high'
+                      ? 'text-warning'
+                      : item.value === 'normal'
+                      ? 'text-success'
+                      : item.value === 'low'
+                      ? 'text-info'
+                      : 'costum-color'
+                  }}"
+                ></i>
+                <span class="ms-2">{{ item.label }}</span>
+              </ng-template>
+              <ng-template
+                ng-option-tmp
+                let-item="item"
+                let-index="index"
+                let-search="searchTerm"
+              >
+              <div [attr.data-cy]="item.data">
+                <i
+                  class="bi bi-circle-fill {{
+                    item.value === 'very-high'
+                      ? 'text-danger'
+                      : item.value === 'high'
+                      ? 'text-warning'
+                      : item.value === 'normal'
+                      ? 'text-success'
+                      : item.value === 'low'
+                      ? 'text-info'
+                      : 'costum-color'
+                  }}"
+                ></i>
+                <span class="ms-2">{{ item.label }}</span>
+
+              </div>
+              </ng-template>
+       
           </ng-select>
         </div>
       </div>
